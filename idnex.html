@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let ninh = {
+        age: 22,
+        handsome: false,
+        salary: '2000 $'
+    }
+
+    class Student {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+    }
+
+    function SuperStudent(score) {
+        this.score = score
+    }
+
+    SuperStudent.prototype = new Student('Hello', 21);
+    let b = new SuperStudent(10);
+    console.log(b)
+
+</script>
+</body>
+</html>
