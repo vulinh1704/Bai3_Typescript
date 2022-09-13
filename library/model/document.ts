@@ -2,9 +2,11 @@ export class Document {
     private _id:number;
     private _producer: string;
     private _quantity: number;
+    static temp = 0;
 
-    constructor(id: number, producer: string, quantity: number) {
-        this._id = id;
+    constructor(producer: string, quantity: number) {
+        Document.temp++;
+        this._id = Document.temp;
         this._producer = producer;
         this._quantity = quantity;
     }

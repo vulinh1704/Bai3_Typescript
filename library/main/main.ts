@@ -1,17 +1,18 @@
 import {Book} from "../model/book";
 import {DocumentManager} from "../service/doccumentManager";
+import {User} from "../model/user";
+import {UserManager} from "../service/userManager";
 
 let input = require('readline-sync');
 let listDoc: DocumentManager = new DocumentManager();
+let listUser: UserManager = new UserManager();
 
 function mainMenu() {
     let menu = `
-    1.Them tai lieu
-    2.Xoa tai lieu
+    1.Thêm tài liệu
+    2.Xóa tài liệu
     3.Sua tai lieu
-    4.Hien thi tai lieu
-    5.Hien thi sach
-    6.Hien thi tap chi
+    4.Hiển thị
     0.Thoat`
     console.log(menu)
 }
@@ -38,17 +39,38 @@ function addMenu() {
 }
 
 function addBook() {
-    let id = +input.question("Nhap id : ");
+    // let id = +input.question("Nhap id : ");
     let producer = input.question("Nha xuat ban: ");
     let quantity = +input.question("So luong: ");
     let page = +input.question("So trang");
     let author = input.question("Tac gia");
-    let book: Book = new Book(id, producer, quantity, page, author)
+    let book: Book = new Book(producer, quantity, page, author)
     listDoc.add(book);
 }
 
 function show() {
-    console.log(listDoc.showAll());
+    let menu = `
+    1.Hien thi tai lieu
+    2.Hien thi sach
+    3.Hien thi tap chi
+    0.Thoát`
+    let choice: number;
+    do {
+        console.log(menu)
+        choice = +input.question("Nhap lua chon cua ban ? : ")
+        switch (choice) {
+            case 1:
+                console.log(listDoc.showAll());
+                break;
+            case 2:
+                showListBook();
+                break;
+            case 0:
+                main();
+                break;
+        }
+    } while (choice != 0);
+
 }
 
 function deleteMenu() {
@@ -64,12 +86,26 @@ function editMenu() {
     let quantity = +input.question("So luong: ");
     let page = +input.question("So trang");
     let author = input.question("Tac gia");
-    let book: Book = new Book(id, producer, quantity, page, author);
-    listDoc.edit(id ,book);
+    let book: Book = new Book(producer, quantity, page, author);
+    listDoc.edit(id, book);
 }
 
-function showListBook(){
+function showListBook() {
     console.log(listDoc.findByType(5));
+    show();
+}
+
+function menuRegister() {
+    let username = input.question("Ten Dang Ki: ")
+    let password = input.question("Mat Khau: ")
+    let user: User = new User(username, password);
+    listUser.register(user);
+    let usernameLogin = "";
+    let passwordLogin = "";
+    do {
+        usernameLogin = input.question("Ten Dang Nhap: ")
+        passwordLogin = input.question("Mat Khau: ")
+    } while (!listUser.login(usernameLogin, passwordLogin));
     main();
 }
 
@@ -91,12 +127,11 @@ function main() {
             case 4:
                 show();
                 break;
-            case 5:
-                showListBook();
-                break;
+
 
         }
     } while (choice != 0);
 }
 
+menuRegister();
 main();

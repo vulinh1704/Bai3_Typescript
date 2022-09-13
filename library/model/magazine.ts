@@ -5,8 +5,8 @@ export class Magazine extends Document{
     private _month: string;
 
 
-    constructor(id: number, producer: string, quantity: number, issue: number, month: string) {
-        super(id, producer, quantity);
+    constructor( producer: string, quantity: number, issue: number, month: string) {
+        super(producer, quantity);
         this._issue = issue;
         this._month = month;
     }

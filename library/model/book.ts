@@ -5,8 +5,8 @@ export class Book extends Document{
     private _author: string;
 
 
-    constructor(id: number, producer: string, quantity: number, page: number, author: string) {
-        super(id, producer, quantity);
+    constructor( producer: string, quantity: number, page: number, author: string) {
+        super(producer, quantity);
         this._page = page;
         this._author = author;
     }

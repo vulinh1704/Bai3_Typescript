@@ -5,6 +5,7 @@ import {Magazine} from "../model/magazine";
 
 export class DocumentManager implements IDocumentManager<Document> {
     documents: Document[] = []
+
     add(t: Document) {
         this.documents.push(t);
     }
