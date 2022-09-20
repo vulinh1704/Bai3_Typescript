@@ -92,9 +92,11 @@ function buyProduct() {
     listProduct.update(idProduct,new Product(product.id,product.name,product.quantity - amount));
 
     let customer = listCustomer.findCustomerById(id);
-    let time = input.question("Nhap thoi gian mua hang: ");
+    let time = new Date();
+    let today = `${time.getDate()}/${time.getMonth() + 1}`;
+
     product.quantity = amount;
-    let orderDetail = new OrderDetail(idOrder, customer, time);
+    let orderDetail = new OrderDetail(idOrder, customer, today);
     orderDetail.add(product);
     orderManage.add(orderDetail);
 }
